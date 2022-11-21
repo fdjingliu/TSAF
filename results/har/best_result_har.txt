@@ -1,0 +1,8 @@
+
+Setting: Model: TSAF Target: 1
+aux_loss_multiplier_d:1000.0 aux_loss_multiplier_y:1000.0 batch_size:512 beta:1.0 beta_d:1.0 beta_x:1.0 beta_y:1.0 d_AE:50 dataset:har device:cuda:0 len_sw:128 n_class:6 n_domains:6 n_epoch:5000 n_feature:6 n_target_domains:1 now_model_name:TSAF sigma:1 target_domain:1 test_every:5000 weight_false:1000.0 weight_mmd:1.0 weight_true:1000.0 x_dim:1152 e_acc: 0.3125	 best_iter: 5000
+
+
+Setting: Model: TSAF Target: 1
+aux_loss_multiplier_d:1000.0 aux_loss_multiplier_y:1000.0 batch_size:512 beta:1.0 beta_d:1.0 beta_x:1.0 beta_y:1.0 d_AE:50 dataset:har device:cuda:0 len_sw:128 n_class:6 n_domains:6 n_epoch:5000 n_feature:6 n_target_domains:1 now_model_name:TSAF sigma:1 target_domain:1 test_every:5000 weight_false:1000.0 weight_mmd:1.0 weight_true:1000.0 x_dim:1152 e_acc: 0.2682	 best_iter: 5000
+
