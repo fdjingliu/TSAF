@@ -370,9 +370,9 @@ class qy(nn.Module):
         return loc_y
 
 # 模型定义
-class GILE(nn.Module):
+class (nn.Module):
     def __init__(self, args):
-        super(GILE, self).__init__()
+        super(, self).__init__()
         self.zd_dim = args.d_AE # TODO 这个是z^d还是label？看着感觉是z^d
         self.zx_dim = 0 # TODO 这个为什么是0？
         self.zy_dim = args.d_AE #

@@ -375,9 +375,9 @@ class qy(nn.Module):
         return loc_y
 
 
-class GILE(nn.Module):
+class (nn.Module):
     def __init__(self, args):
-        super(GILE, self).__init__()
+        super(, self).__init__()
         self.zd_dim = args.d_AE
         self.zx_dim = 0
         self.zy_dim = args.d_AE

@@ -97,7 +97,7 @@ def get_accuracy(source_loaders, DEVICE, model, classifier_fn, batch_size):
 
         return accuracy_d, accuracy_y, accuracy_d_false, accuracy_y_false
 
-def train_GILE(model, DEVICE, optimizer, source_loaders, target_loader, result_csv, result_txt, args):
+def train_(model, DEVICE, optimizer, source_loaders, target_loader, result_csv, result_txt, args):
     acc_all, result = [], []
     best_acc, best_iter = 0.0, 0
 
@@ -126,7 +126,7 @@ def train_GILE(model, DEVICE, optimizer, source_loaders, target_loader, result_c
 
 
 def train(model, DEVICE, optimizer, source_loaders, target_loader, result_csv, result_txt, args):
-    if args.now_model_name in ['GILE']:
-        return train_GILE(model, DEVICE, optimizer, source_loaders, target_loader, result_csv, result_txt, args)
+    if args.now_model_name in ['']:
+        return train_(model, DEVICE, optimizer, source_loaders, target_loader, result_csv, result_txt, args)
     else:
         pass

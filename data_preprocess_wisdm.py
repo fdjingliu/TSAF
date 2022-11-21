@@ -16,15 +16,15 @@ def load_domain_data(domain_idx):
     :param domain_idx:
     :return: X and y data of the entire domain
     """
-    data_dir = './data/UniMiB-SHAR/'
-    saved_filename = 'shar_domain_' + domain_idx + '_wd.data' # with domain label
+    data_dir = './data//'
+    saved_filename = '_domain_' + domain_idx + '_wd.data' # with domain label
     if os.path.isfile(data_dir + saved_filename) == True: # 如果文件已经预处理好
         data = np.load(data_dir + saved_filename, allow_pickle=True)
         X = data[0][0]
         y = data[0][1]
         d = data[0][2]
     else: # 没有设置过，则处理一次
-        str_folder = './data/UniMiB-SHAR/data/'
+        str_folder = './data//data/'
         data_all = scipy.io.loadmat(str_folder + 'acc_data.mat') # TODO 看看格式
         y_id_all = scipy.io.loadmat(str_folder + 'acc_labels.mat')
         y_id_all = y_id_all['acc_labels']  # (11771, 3)，只要label的字段
@@ -59,7 +59,7 @@ def load_domain_data(domain_idx):
 
     return X, y, d
 
-class data_loader_shar(Dataset):
+class data_loader_(Dataset):
     def __init__(self, samples, labels, domains):
         self.samples = samples
         self.labels = labels
@@ -73,7 +73,7 @@ class data_loader_shar(Dataset):
         return len(self.samples)
 
 
-def prep_domains_shar(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
+def prep_domains_(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
     source_domain_list = ['1', '2', '3', '5']
     source_domain_list.remove(args.target_domain)
 
@@ -89,7 +89,7 @@ def prep_domains_shar(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
         weights = weights.double()
         sample_weights = get_sample_weights(y, weights) # 取的概率为倒数份之一。看看下面的才做，怎么凑成1个dataset的
         sampler = torch.utils.data.sampler.WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights), replacement=True)
-        data_set = data_loader_shar(x, y, d)
+        data_set = data_loader_(x, y, d)
         source_loader = DataLoader(data_set, batch_size=args.batch_size, shuffle=False, drop_last=True, sampler=sampler)
         print('source_loader batch: ', len(source_loader))
         source_loaders.append(source_loader)
@@ -98,7 +98,7 @@ def prep_domains_shar(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
     print('target_domain:', args.target_domain)
     x, y, d = load_domain_data(args.target_domain)
     x = x.reshape(-1, 151, 3)
-    data_set = data_loader_shar(x, y, d)
+    data_set = data_loader_(x, y, d)
     target_loader = DataLoader(data_set, batch_size=args.batch_size, shuffle=False)
     print('target_loader batch: ', len(target_loader))
     return source_loaders, target_loader

@@ -17,7 +17,7 @@ from sklearn.model_selection import StratifiedShuffleSplit
 
 NUM_FEATURES = 77
 
-class data_loader_oppor(Dataset):
+class data_loader_(Dataset):
     def __init__(self, samples, labels, domains):
         self.samples = samples
         self.labels = labels
@@ -36,15 +36,15 @@ def load_domain_data(domain_idx):
     :param domain_idx:
     :return: X and y data of the entire domain
     """
-    data_dir = './data/oppor/'
-    saved_filename = 'oppor_domain_' + domain_idx + '_wd.data' # with domain label
+    data_dir = './data//'
+    saved_filename = '_domain_' + domain_idx + '_wd.data' # with domain label
     if os.path.isfile(data_dir + saved_filename) == True:
         data = np.load(data_dir + saved_filename, allow_pickle=True)
         X = data[0][0]
         y = data[0][1]
         d = data[0][2]
     else:
-        str_folder = './data/oppor/OpportunityUCIDataset/dataset/'
+        str_folder = './data//OpportunityUCIDataset/dataset/'
         OPPOR_DATA_FILES = [
             'S1-Drill.dat',
             'S1-ADL1.dat',
@@ -253,7 +253,7 @@ def normalize(x):
     x /= std
     return x
 
-def prep_domains_oppor(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
+def prep_domains_(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
     source_domain_list = ['S1', 'S2', 'S3', 'S4']
     source_domain_list.remove(args.target_domain)
 
@@ -268,7 +268,7 @@ def prep_domains_oppor(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
         weights = weights.double()
         sample_weights = get_sample_weights(y_win, weights)
         sampler = torch.utils.data.sampler.WeightedRandomSampler(weights=sample_weights, num_samples=len(sample_weights), replacement=True)
-        data_set = data_loader_oppor(x_win, y_win, d_win)
+        data_set = data_loader_(x_win, y_win, d_win)
         source_loader = DataLoader(data_set, batch_size=args.batch_size, shuffle=False, drop_last=True, sampler=sampler)
         print('source_loader batch: ', len(source_loader))
         source_loaders.append(source_loader)
@@ -277,7 +277,7 @@ def prep_domains_oppor(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
     print('target_domain:', args.target_domain)
     x, y, d = load_domain_data(args.target_domain)
     x_win, y_win, d_win = opp_sliding_window_w_d(x, y, d, SLIDING_WINDOW_LEN, SLIDING_WINDOW_STEP)
-    data_set = data_loader_oppor(x_win, y_win, d_win)
+    data_set = data_loader_(x_win, y_win, d_win)
     target_loader = DataLoader(data_set, batch_size=args.batch_size, shuffle=False)
 
     return source_loaders, target_loader

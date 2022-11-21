@@ -4,18 +4,18 @@ import matplotlib
 matplotlib.use('Agg')
 from train import train
 from utils import set_name
-import network_shar as net # 加载模型
-import data_preprocess_shar
+import network_ as net # 加载模型
+import data_preprocess_
 import torch
 import argparse
 
 DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 parser = argparse.ArgumentParser(description='argument setting of network')
-parser.add_argument('--now_model_name', type=str, default='GILE', help='the type of model')
+parser.add_argument('--now_model_name', type=str, default='', help='the type of model')
 
 parser.add_argument('--batch_size', type=int, default=64, help='batch size of training')
 parser.add_argument('--n_epoch', type=int, default=2, help='number of training epochs')
-parser.add_argument('--dataset', type=str, default='shar', help='name of dataset')
+parser.add_argument('--dataset', type=str, default='', help='name of dataset')
 
 parser.add_argument('--n_feature', type=int, default=3, help='name of feature dimension 3*151')
 parser.add_argument('--len_sw', type=int, default=151, help='length of sliding window')
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     args.device = DEVICE
     # 先是源的，再到目标的
-    source_loaders, target_loader = data_preprocess_shar.prep_domains_shar(args, SLIDING_WINDOW_LEN=args.len_sw, SLIDING_WINDOW_STEP=int(0.5*args.len_sw))
+    source_loaders, target_loader = data_preprocess_.prep_domains_(args, SLIDING_WINDOW_LEN=args.len_sw, SLIDING_WINDOW_STEP=int(0.5*args.len_sw))
     model = net.load_model(args) # 加载设计的模型
     model = model.to(DEVICE)
     optimizer = net.set_up_optimizers(model.parameters())

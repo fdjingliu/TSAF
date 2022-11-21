@@ -4,18 +4,18 @@ matplotlib.use('Agg')
 
 from train import train
 from utils import set_name
-import network_ucihar as net
-import data_preprocess_ucihar
+import network_ as net
+import data_preprocess_
 import torch
 import argparse
 
 DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 parser = argparse.ArgumentParser(description='argument setting of network')
-parser.add_argument('--now_model_name', type=str, default='GILE', help='the type of model')
+parser.add_argument('--now_model_name', type=str, default='', help='the type of model')
 
 parser.add_argument('--batch_size', type=int, default=64, help='batch size of training')
 parser.add_argument('--n_epoch', type=int, default=150, help='number of training epochs')
-parser.add_argument('--dataset', type=str, default='ucihar', help='name of dataset')
+parser.add_argument('--dataset', type=str, default='', help='name of dataset')
 
 parser.add_argument('--n_feature', type=int, default=9, help='name of feature dimension')
 parser.add_argument('--len_sw', type=int, default=128, help='length of sliding window')
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     torch.manual_seed(10)
     args = parser.parse_args()
     args.device = DEVICE
-    source_loaders, target_loader = data_preprocess_ucihar.prep_domains_ucihar(args, SLIDING_WINDOW_LEN=args.len_sw, SLIDING_WINDOW_STEP=int(0.5*args.len_sw))
+    source_loaders, target_loader = data_preprocess_.prep_domains_(args, SLIDING_WINDOW_LEN=args.len_sw, SLIDING_WINDOW_STEP=int(0.5*args.len_sw))
     model = net.load_model(args)
     model = model.to(DEVICE)
     optimizer = net.set_up_optimizers(model.parameters())

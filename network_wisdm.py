@@ -2,11 +2,11 @@
 
 import torch
 DEVICE = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-from model_GILE_shar import GILE
+from model__ import 
 
 def load_model(args):
-    if args.now_model_name == 'GILE':
-        model = GILE(args) # 加载模型
+    if args.now_model_name == '':
+        model = (args) # 加载模型
     else:
         print('model not available!\n')
     return model

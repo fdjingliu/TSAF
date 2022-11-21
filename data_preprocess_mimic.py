@@ -40,8 +40,8 @@ def load_domain_data(domain_idx):
     :param domain_idx:
     :return: X and y data of the entire domain
     """
-    data_dir = './data/ucihar/'
-    saved_filename = 'ucihar_domain_' + domain_idx + '_wd.data' # with domain label
+    data_dir = './data//'
+    saved_filename = '_domain_' + domain_idx + '_wd.data' # with domain label
 
     if os.path.isfile(data_dir + saved_filename) == True:
         data = np.load(data_dir + saved_filename, allow_pickle=True)
@@ -49,7 +49,7 @@ def load_domain_data(domain_idx):
         y = data[0][1]
         d = data[0][2]
     else:
-        str_folder = './data/ucihar/'
+        str_folder = './data//'
         INPUT_SIGNAL_TYPES = [
             "body_acc_x_",
             "body_acc_y_",
@@ -97,7 +97,7 @@ def load_domain_data(domain_idx):
 
     return X, y, d
 
-class data_loader_ucihar(Dataset):
+class data_loader_(Dataset):
     def __init__(self, samples, labels, domains, t):
         self.samples = samples
         self.labels = labels
@@ -113,7 +113,7 @@ class data_loader_ucihar(Dataset):
         return len(self.samples)
 
 
-def prep_domains_ucihar(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
+def prep_domains_(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
 
     source_domain_list = ['0', '1', '2', '3', '4']
     source_domain_list.remove(args.target_domain)
@@ -133,7 +133,7 @@ def prep_domains_ucihar(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
             transforms.ToTensor(),
             transforms.Normalize(mean=(0, 0, 0, 0, 0, 0, 0, 0, 0), std=(1, 1, 1, 1, 1, 1, 1, 1, 1))
         ])
-        data_set = data_loader_ucihar(x, y, d, transform)
+        data_set = data_loader_(x, y, d, transform)
         source_loader = DataLoader(data_set, batch_size=args.batch_size, shuffle=False, drop_last=True, sampler=sampler)
         print('source_loader batch: ', len(source_loader))
         source_loaders.append(source_loader)
@@ -142,7 +142,7 @@ def prep_domains_ucihar(args, SLIDING_WINDOW_LEN=0, SLIDING_WINDOW_STEP=0):
     print('target_domain:', args.target_domain)
     x, y, d = load_domain_data(args.target_domain)
     x = np.transpose(x.reshape((-1, 1, 128, 9)), (0, 2, 1, 3))
-    data_set = data_loader_ucihar(x, y, d, transform)
+    data_set = data_loader_(x, y, d, transform)
     target_loader = DataLoader(data_set, batch_size=args.batch_size, shuffle=False)
     print('target_loader batch: ', len(target_loader))
     return source_loaders, target_loader
