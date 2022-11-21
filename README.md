@@ -9,7 +9,8 @@ This repository contains code for our paper: TSAF: Two-Stage Alignment Framewor
 - math, sklearn, tensorboardX
 
 ## Datasets
-You need to create a folder *dataset* and download the pre-processed versions of the datasets. The urls of dataset is as follows. For MIMIC-IV, you need to get permission even though it is publicly available.
+You need to create a folder *data* and download the pre-processed versions of the datasets. For MIMIC-IV, you need to get permission even though it is publicly available.
+
 - [HAR](https://researchdata.ntu.edu.sg/dataset.xhtml?persistentId=doi:10.21979/N9/0SYHTZ)
 - [MIMIC-IV](https://physionet.org/content/mimiciv/0.4/)
 - [WISDM](https://researchdata.ntu.edu.sg/dataset.xhtml?persistentId=doi:10.21979/N9/KJWE5B)
