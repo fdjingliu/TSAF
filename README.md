@@ -24,7 +24,7 @@ We compare our method with the following baselines: [CoDATS](https://dl.acm.org
 
 ## Training & Testing
 
-Change the config `train.py` depending on what you want
+The following command and related code is being refactored.
 
 ``` shell
 cd .
